@@ -27,7 +27,7 @@ function UserForm({
   const { userRegisterLoading } = useSelector((state) => state.user);
 
   const layout = {
-    labelCol: { span: 5 },
+    labelCol: { span: 4 },
   };
 
   return (

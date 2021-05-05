@@ -24,8 +24,21 @@ const Wrapper = styled.div`
 function Routes() {
   return (
     <Wrapper>
-      <img src={ely} style={{ width: "300px" }} />
-      <div>Codig Test</div>
+      <img
+        src={ely}
+        alt={ely}
+        style={{ width: "300px", marginBottom: "10px" }}
+      />
+      <div
+        style={{
+          fontSize: "50px",
+          color: "white",
+          fontWeight: "700",
+          marginBottom: "50px",
+        }}
+      >
+        Codig Test
+      </div>
       <Switch>
         <Route exact path="/" component={Main} />
         <Route exact path="/register" component={Register} />
