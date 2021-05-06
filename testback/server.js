@@ -57,7 +57,7 @@ server.post("/auth/register", (req, res) => {
   if (isAuthenticated({ email, password }) === true) {
     const status = 401;
     const message = "Email and Password already exist";
-    res.status(status).json({ status, message });
+    res.status(status).json(`[${status}]${message}`);
     return;
   }
 
@@ -65,7 +65,7 @@ server.post("/auth/register", (req, res) => {
     if (err) {
       const status = 401;
       const message = err;
-      res.status(status).json({ status, message });
+      res.status(status).json(`[${status}]${message}`);
       return;
     }
 
@@ -90,7 +90,7 @@ server.post("/auth/register", (req, res) => {
         if (err) {
           const status = 401;
           const message = err;
-          res.status(status).json({ status, message });
+          res.status(status).json(`[${status}]${message}`);
           return;
         }
       }
@@ -131,7 +131,7 @@ server.post("/auth/update", (req, res) => {
   const { id, password } = req.body;
   if (isPassword({ id, password }) === false) {
     const status = 401;
-    const message = "Incorrect email or password";
+    const message = "Incorrect password";
     res.status(status).json(`[${status}]${message}`);
     return;
   }
@@ -144,7 +144,6 @@ server.get("/auth/logout", (req, res) => {
   res.status(200).json("logout success");
 });
 
-// /auth 만 입력시 토큰 유효성 검사
 server.use(/^(?!\/auth).*$/, (req, res, next) => {
   if (
     req.headers.authorization === undefined ||
@@ -152,7 +151,7 @@ server.use(/^(?!\/auth).*$/, (req, res, next) => {
   ) {
     const status = 401;
     const message = "Error in authorization format";
-    res.status(status).json({ status, message });
+    res.status(status).json(`[${status}]${message}`);
     return;
   }
   try {
@@ -162,14 +161,14 @@ server.use(/^(?!\/auth).*$/, (req, res, next) => {
     if (verifyTokenResult instanceof Error) {
       const status = 401;
       const message = "Access token not provided";
-      res.status(status).json({ status, message });
+      res.status(status).json(`[${status}]${message}`);
       return;
     }
     next();
   } catch (err) {
     const status = 401;
     const message = "Error access_token is revoked";
-    res.status(status).json({ status, message });
+    res.status(status).json(`[${status}]${message}`);
   }
 });
 

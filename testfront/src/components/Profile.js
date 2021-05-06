@@ -1,7 +1,7 @@
 import { Avatar, Card } from "antd";
 import Meta from "antd/lib/card/Meta";
 import { UserOutlined } from "@ant-design/icons";
-import React, { useCallback } from "react";
+import React, { useCallback, useEffect } from "react";
 import { createGlobalStyle } from "styled-components";
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";

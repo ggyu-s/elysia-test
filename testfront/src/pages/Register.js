@@ -8,7 +8,9 @@ import useInput from "../hooks/useinput";
 function Register() {
   const history = useHistory();
   const dispatch = useDispatch();
-  const { userRegisterDone } = useSelector((state) => state.user);
+  const { userRegisterDone, userRegisterError, userInfo } = useSelector(
+    (state) => state.user
+  );
   const [email, onChangeEmail] = useInput("");
   const [password, onChangePassword] = useInput("");
   const [passwordCheck, onChangePasswordCheck] = useInput("");
@@ -36,10 +38,16 @@ function Register() {
   }, [history]);
 
   useEffect(() => {
-    if (userRegisterDone) {
+    if (userRegisterDone || userInfo) {
       history.replace("/");
     }
-  }, [history, userRegisterDone]);
+  }, [history, userInfo, userRegisterDone]);
+
+  useEffect(() => {
+    if (userRegisterError) {
+      alert(userRegisterError);
+    }
+  }, [userRegisterError]);
 
   return (
     <UserForm

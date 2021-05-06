@@ -18,7 +18,9 @@ const GlobalStyle = createGlobalStyle`
 function LoginForm() {
   const history = useHistory();
   const dispatch = useDispatch();
-  const { userLoginLoading } = useSelector((state) => state.user);
+  const { userLoginLoading, userLoginError } = useSelector(
+    (state) => state.user
+  );
   const [email, onChangeEmail] = useInput("");
   const [password, onChangePassword] = useInput("");
 
@@ -41,6 +43,12 @@ function LoginForm() {
   const onClickRegister = useCallback(() => {
     history.replace("/register");
   }, [history]);
+
+  useEffect(() => {
+    if (userLoginError) {
+      alert(userLoginError);
+    }
+  }, [userLoginError]);
 
   return (
     <div style={{ width: "500px", margin: "30px auto" }}>

@@ -19,8 +19,7 @@ export const userRegister = (info) => async (dispatch) => {
     dispatch({
       type: USER_REGISTER_REQUEST,
     });
-    const result = await axios.post("/auth/register", info.data);
-    console.log(result.data);
+    await axios.post("/auth/register", info.data);
     dispatch({
       type: USER_REGISTER_SUCCESS,
     });
@@ -38,7 +37,6 @@ export const userLogin = (info) => async (dispatch) => {
       type: USER_LOGIN_REQUEST,
     });
     const result = await axios.post("/auth/login", info.data);
-    console.log(result.data);
     axios.defaults.headers.common[
       "Authorization"
     ] = `Bearer ${result.data.access_token}`;
@@ -63,8 +61,7 @@ export const userUpdate = (info) => async (dispatch) => {
     dispatch({
       type: USER_UPDATE_REQUEST,
     });
-    const result = await axios.post("/auth/update", info.data);
-    console.log(result.data);
+    await axios.post("/auth/update", info.data);
     dispatch({
       type: USER_UPDATE_SUCCESS,
       data: {
@@ -86,8 +83,7 @@ export const userLogout = () => async (dispatch) => {
     dispatch({
       type: USER_LOGOUT_REQUEST,
     });
-    const result = await axios.get("/auth/logout");
-    console.log(result.data);
+    await axios.get("/auth/logout");
     axios.defaults.headers.common["Authorization"] = undefined;
     dispatch({
       type: USER_LOGOUT_SUCCESS,
