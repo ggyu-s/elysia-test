@@ -19,8 +19,8 @@ const Wrapper = styled.div`
   flex-direction: column;
 `;
 const TextWrapper = styled.div`
-  font-size: "50px";
-  color: "white";
+  font-size: 50px;
+  color: white;
   font-weight: 700;
   margin-bottom: 50px;
 `;
