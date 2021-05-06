@@ -139,9 +139,13 @@ server.post("/auth/update", (req, res) => {
 });
 
 server.get("/auth/logout", (req, res) => {
-  res.clearCookie("access_token");
-  console.log("logout");
-  res.status(200).json("logout success");
+  try {
+    res.clearCookie("access_token");
+    console.log("logout");
+    res.status(200).json("logout success");
+  } catch (error) {
+    res.status(404).json(error);
+  }
 });
 
 server.use(/^(?!\/auth).*$/, (req, res, next) => {

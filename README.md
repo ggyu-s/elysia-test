@@ -4,6 +4,10 @@
 
 - React.js
 - ant-Design ( styled-components )
+
+### 상태관리
+
+- Redux-thunk
   <br/><br/>
 
 ## 환경
@@ -133,4 +137,69 @@ testfront에서 실행<br/>
       })
     );
   }, [password, passwordCheck, dispatch, userInfo, email, name]);
+```
+
+4. 로그인시 서버에서 토큰을 발급받고 쿠키에 저장하는 코드
+
+```
+server.post("/auth/login", (req, res) => {
+  console.log("login endpoint called; request body:");
+  console.log(req.body);
+  const { email, password } = req.body;
+  if (isAuthenticated({ email, password }) === false) {
+    const status = 401;
+    const message = "Incorrect email or password";
+    res.status(status).json(`[${status}]${message}`);
+    return;
+  }
+  const userInfo = userInfoFind(email);
+  const { userEmail = email, name, id } = userInfo[0];
+  const access_token = createToken({ email, password });
+  console.log("Access Token:" + access_token);
+  res.cookie("access_token", access_token, { httpOnly: true, secure: true });
+  res.status(200).json({ access_token, userEmail, name, id });
+});
+```
+
+5. 토큰을 받아서 authorazation에 저장하는 코드
+
+```
+export const userLogin = (info) => async (dispatch) => {
+  try {
+    dispatch({
+      type: USER_LOGIN_REQUEST,
+    });
+    const result = await axios.post("/auth/login", info.data);
+    axios.defaults.headers.common[
+      "Authorization"
+    ] = `Bearer ${result.data.access_token}`;
+    dispatch({
+      type: USER_LOGIN_SUCCESS,
+      data: {
+        id: result.data.id,
+        email: result.data.userEmail,
+        name: result.data.name,
+      },
+    });
+  } catch (error) {
+    dispatch({
+      type: USER_LOGIN_FAILURE,
+      error: error.response.data,
+    });
+  }
+};
+```
+
+6.로그아웃시 서버에서 쿠키 삭제 코드
+
+```
+server.get("/auth/logout", (req, res) => {
+  try {
+    res.clearCookie("access_token");
+    console.log("logout");
+    res.status(200).json("logout success");
+  } catch (error) {
+    res.status(404).json(error);
+  }
+});
 ```
