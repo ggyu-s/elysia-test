@@ -17,7 +17,7 @@ export const USER_LOGOUT_FAILURE = "USER_LOGOUT_FAILURE";
 export const STATE_INIT = "STATE_INIT";
 
 const inititalState = {
-  userInfo: null,
+  userInfo: null, // 로그인한 유저정보 저장
   userRegisterLoading: false,
   userRegisterDone: false,
   userRegisterError: null,
@@ -40,6 +40,9 @@ const userReducer = (state = inititalState, action) => {
         userUpdateDone: false,
         userLoginDone: false,
         userRegisterDone: false,
+        userRegisterError: null,
+        userLoginError: null,
+        userUpdateError: null,
       };
     case USER_REGISTER_REQUEST:
       return {

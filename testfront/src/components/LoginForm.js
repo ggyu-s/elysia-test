@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import useInput from "../hooks/useinput";
 import { userLogin } from "../actions/useraction";
 import { useHistory } from "react-router-dom";
+import { STATE_INIT } from "../reducers/user";
 
 const StyledButton = styled(Button)`
   margin: 5px;
@@ -28,6 +29,9 @@ function LoginForm() {
     labelCol: { span: 4 },
   };
 
+  /**
+   * 로그인클릭시 디스패치
+   */
   const onSubmit = useCallback(() => {
     dispatch(
       userLogin({
@@ -37,18 +41,26 @@ function LoginForm() {
         },
       })
     );
-    console.log(email, password);
   }, [dispatch, email, password]);
 
+  /**
+   * 회원가입페이지로 이동
+   */
   const onClickRegister = useCallback(() => {
     history.replace("/register");
   }, [history]);
 
+  /**
+   * 로그인 실패시 에러표시
+   */
   useEffect(() => {
     if (userLoginError) {
       alert(userLoginError);
+      dispatch({
+        type: STATE_INIT,
+      });
     }
-  }, [userLoginError]);
+  }, [dispatch, userLoginError]);
 
   return (
     <div style={{ width: "500px", margin: "30px auto" }}>

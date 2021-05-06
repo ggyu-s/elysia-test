@@ -16,6 +16,9 @@ function Register() {
   const [passwordCheck, onChangePasswordCheck] = useInput("");
   const [name, onChangeName] = useInput("");
 
+  /**
+   * 회원가입 디스패치
+   */
   const onSubmit = useCallback(() => {
     if (password !== passwordCheck) {
       alert("password error");
@@ -33,16 +36,25 @@ function Register() {
     console.log(password, passwordCheck);
   }, [dispatch, email, password, passwordCheck, name]);
 
+  /**
+   * 취소버튼클릭시 메인화면 이동
+   */
   const onCancleBack = useCallback(() => {
     history.replace("/");
   }, [history]);
 
+  /**
+   * 로그인 또는 회원가입이 끝났을 때 메인화면 이동
+   */
   useEffect(() => {
     if (userRegisterDone || userInfo) {
       history.replace("/");
     }
   }, [history, userInfo, userRegisterDone]);
 
+  /**
+   * 에러 발생시 에러 표시
+   */
   useEffect(() => {
     if (userRegisterError) {
       alert(userRegisterError);

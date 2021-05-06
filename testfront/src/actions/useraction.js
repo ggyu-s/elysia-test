@@ -14,6 +14,9 @@ import {
   USER_UPDATE_SUCCESS,
 } from "../reducers/user";
 
+/**
+ * 회원가입
+ */
 export const userRegister = (info) => async (dispatch) => {
   try {
     dispatch({
@@ -31,6 +34,9 @@ export const userRegister = (info) => async (dispatch) => {
   }
 };
 
+/**
+ * 로그인
+ */
 export const userLogin = (info) => async (dispatch) => {
   try {
     dispatch({
@@ -56,6 +62,9 @@ export const userLogin = (info) => async (dispatch) => {
   }
 };
 
+/**
+ * 수정
+ */
 export const userUpdate = (info) => async (dispatch) => {
   try {
     dispatch({
@@ -78,6 +87,9 @@ export const userUpdate = (info) => async (dispatch) => {
   }
 };
 
+/**
+ * 로그아웃
+ */
 export const userLogout = () => async (dispatch) => {
   try {
     dispatch({

@@ -12,6 +12,9 @@ const GlobalStyle = createGlobalStyle`
     }
 `;
 
+/**
+ * 회원가입페이지 / 수정페이지
+ */
 function UserForm({
   email,
   password,

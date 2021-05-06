@@ -16,6 +16,9 @@ function ProfileUpdate() {
   const [email, onChangeEmail] = useInput(userInfo ? userInfo.email : "");
   const [name, onChangeName] = useInput(userInfo ? userInfo.name : "");
 
+  /**
+   * 클릭시 업데이트 디스패치
+   */
   const onSubmit = useCallback(() => {
     if (password !== passwordCheck) {
       alert("password error");
@@ -31,12 +34,18 @@ function ProfileUpdate() {
         },
       })
     );
-  }, [password, passwordCheck, dispatch, userInfo && userInfo.id, email, name]);
+  }, [password, passwordCheck, dispatch, userInfo, email, name]);
 
+  /**
+   * 취소버튼 클릭시 메인화면으로 이동
+   */
   const onCancleBack = useCallback(() => {
     history.replace("/");
   }, [history]);
 
+  /**
+   * 아이다가 없거나 업데이트과정이 끝나면 메인페이지 이동
+   */
   useEffect(() => {
     if (userUpdateDone) {
       history.replace("/");
@@ -47,11 +56,14 @@ function ProfileUpdate() {
     }
   }, [userUpdateDone, history, userInfo]);
 
+  /**
+   * 에러 발생시 에러 표시
+   */
   useEffect(() => {
     if (userUpdateError) {
       alert(userUpdateError);
     }
-  }, [history, userUpdateError]);
+  }, [userUpdateError]);
 
   return (
     <>

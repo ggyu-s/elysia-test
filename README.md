@@ -4,14 +4,21 @@
 
 - React.js
 - ant-Design ( styled-components )
-  <br/>
+  <br/><br/>
+
+## 환경
+
+- MAC OS
+- git
+- VScode
+  <br/><br/>
 
 ## 토큰을 저장하는 방법
 
 ### 쿠키와 HEADER에 저장
 
 >    <br/>
-> 1. 쿠키에 저장을 할 때 옵션으로 HttpOnly를 설정하면 자바스크립트르 접근이 불가능합니다. Secure 옵션을 주게 되면 쿠키는 HTTPS 통신으로만 전송되기 때문에 보안 수준을 한 단계 더 높여줄 수 있다.
+> 1. 쿠키에 저장을 할 때 옵션으로 HttpOnly를 설정하면 자바스크립트르 접근이 불가능합니다. Secure 옵션을 주게 되면 쿠키는 HTTPS 통신으로만 전송되기 때문에 보안 수준을 한 단계 더 높여줄 수 있습니다..
 >    <br/><br/>
 > 2. 쿠키를 이용할 경우 CSRF공격에 취약하기 때문에 CORS를 적용시켜 허용한 사이트 외에 접근을 못하도록 합니다.
 >    <br/><br/>
@@ -67,5 +74,63 @@ testfront에서 실행<br/>
     npm run start
 
 ![main.png](./testfront/src/images/main.png)
+![profile.png](./testfront/src/images/profile.png)
 
 ## 작동하는 코드
+
+1. 회원가입
+
+```
+ const onSubmit = useCallback(() => {
+    if (password !== passwordCheck) {
+      alert("password error");
+      return;
+        }
+        dispatch(
+        userRegister({
+            data: {
+            email,
+            password,
+            name,
+            },
+        })
+        );
+    console.log(password, passwordCheck);
+    }, [dispatch, email, password, passwordCheck, name]);
+```
+
+2. 로그인
+
+```
+ const onSubmit = useCallback(() => {
+    dispatch(
+      userLogin({
+        data: {
+          email,
+          password,
+        },
+      })
+    );
+  }, [dispatch, email, password]);
+```
+
+3. 정보수정
+
+```
+ const onSubmit = useCallback(() => {
+    if (password !== passwordCheck) {
+      alert("password error");
+      return;
+    }
+    dispatch(
+      userUpdate({
+        data: {
+          id: userInfo && userInfo.id,
+          email,
+          name,
+          password,
+        },
+      })
+    );
+  }, [password, passwordCheck, dispatch, userInfo, email, name]);
+```

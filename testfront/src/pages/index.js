@@ -8,6 +8,9 @@ function Main() {
   const dispatch = useDispatch();
   const { userInfo } = useSelector((state) => state.user);
 
+  /**
+   * 상태 초기화 디스패치
+   */
   useEffect(() => {
     dispatch({
       type: STATE_INIT,

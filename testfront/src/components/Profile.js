@@ -1,7 +1,7 @@
 import { Avatar, Card } from "antd";
 import Meta from "antd/lib/card/Meta";
 import { UserOutlined } from "@ant-design/icons";
-import React, { useCallback, useEffect } from "react";
+import React, { useCallback } from "react";
 import { createGlobalStyle } from "styled-components";
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
@@ -20,10 +20,16 @@ function Profile({ userInfo }) {
   const dispatch = useDispatch();
   const history = useHistory();
 
+  /**
+   * 프로필 페이지 이동
+   */
   const onMoveUpdate = useCallback(() => {
     history.replace("profileupdate");
   }, [history]);
 
+  /**
+   * 클릭시 로그아웃
+   */
   const onClickLogout = useCallback(() => {
     dispatch(userLogout());
   }, [dispatch]);
