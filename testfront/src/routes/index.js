@@ -18,6 +18,12 @@ const Wrapper = styled.div`
   background-size: cover;
   flex-direction: column;
 `;
+const TextWrapper = styled.div`
+  font-size: "50px";
+  color: "white";
+  font-weight: 700;
+  margin-bottom: 50px;
+`;
 
 function Routes() {
   return (
@@ -27,16 +33,7 @@ function Routes() {
         alt={ely}
         style={{ width: "300px", marginBottom: "10px" }}
       />
-      <div
-        style={{
-          fontSize: "50px",
-          color: "white",
-          fontWeight: "700",
-          marginBottom: "50px",
-        }}
-      >
-        Coding Test
-      </div>
+      <TextWrapper>Coding Test</TextWrapper>
       <Switch>
         <Route exact path="/" component={Main} />
         <Route exact path="/register" component={Register} />
